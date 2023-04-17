@@ -1,13 +1,10 @@
 package com.zirconia.employeemanagementapi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
+@Table(name = "user_details")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +14,7 @@ public class User {
 
     private String password;
 
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     private String firstName;
 
@@ -32,6 +29,10 @@ public class User {
     private String addr3;
 
     private BigDecimal postalCode;
+
+    private Boolean isAdmin = false;
+
+    private Boolean isValidated = false;
 
     public int getUserId() {
         return userId;
@@ -57,11 +58,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -121,13 +122,29 @@ public class User {
         this.postalCode = postalCode;
     }
 
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Boolean getValidated() {
+        return isValidated;
+    }
+
+    public void setValidated(Boolean validated) {
+        isValidated = validated;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber=" + phoneNumber +
@@ -135,6 +152,8 @@ public class User {
                 ", addr2='" + addr2 + '\'' +
                 ", addr3='" + addr3 + '\'' +
                 ", postalCode=" + postalCode +
+                ", isAdmin=" + isAdmin +
+                ", isValidated=" + isValidated +
                 '}';
     }
 }
